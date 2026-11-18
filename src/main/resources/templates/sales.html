@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Sales Management</title>
+    <style>
+        body { font-family: Arial; background: #f5f5f5; padding: 30px; }
+        .container { background: white; padding: 25px; border-radius: 10px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { padding: 12px; border: 1px solid #ddd; text-align: left; }
+        th { background: #b8860b; color: white; }
+        a, button { background: #b8860b; color: white; padding: 10px; text-decoration: none; border: none; cursor: pointer; }
+        .delete { background: #b22222; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Sales Management</h1>
+    <a th:href="@{/sales/add}">Create New Sale</a>
+    <a th:href="@{/}">Back to Dashboard</a>
+
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Customer</th>
+            <th>Product</th>
+            <th>Quantity</th>
+            <th>Total Amount</th>
+            <th>Date</th>
+            <th>Action</th>
+        </tr>
+        <tr th:each="sale : ${sales}">
+            <td th:text="${sale.id}"></td>
+            <td th:text="${sale.customer.name}"></td>
+            <td th:text="${sale.product.name}"></td>
+            <td th:text="${sale.quantity}"></td>
+            <td th:text="${#numbers.formatDecimal(sale.totalAmount, 1, 2)}"></td>
+            <td th:text="${sale.saleDate}"></td>
+            <td>
+                <form th:action="@{/sales/delete/{id}(id=${sale.id})}" method="post">
+                    <button class="delete" type="submit"
+                        onclick="return confirm('Delete this sale and restore stock?')">Delete</button>
+                </form>
+            </td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

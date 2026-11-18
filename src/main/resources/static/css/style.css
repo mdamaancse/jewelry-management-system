@@ -1,0 +1,306 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #101010;
+    color: #eee;
+}
+
+.sidebar {
+    width: 250px;
+    height: 100vh;
+    background: #171717;
+    position: fixed;
+    padding: 30px 20px;
+    border-right: 1px solid #333;
+}
+
+.brand {
+    font-size: 23px;
+    font-weight: bold;
+    color: #d6ae55;
+    margin-bottom: 45px;
+}
+
+.brand span {
+    color: white;
+    font-size: 14px;
+    display: block;
+    letter-spacing: 4px;
+    margin-top: 5px;
+}
+
+.menu-title {
+    color: #777;
+    font-size: 11px;
+    margin-bottom: 15px;
+}
+
+.sidebar a {
+    display: block;
+    padding: 14px;
+    color: #aaa;
+    text-decoration: none;
+    border-radius: 7px;
+    margin-bottom: 7px;
+    font-size: 14px;
+}
+
+.sidebar a:hover,
+.sidebar a.active {
+    background: #352c1a;
+    color: #e5bd66;
+}
+
+.sidebar-bottom {
+    position: absolute;
+    bottom: 25px;
+    left: 20px;
+    right: 20px;
+}
+
+.main-content {
+    margin-left: 250px;
+    padding: 35px;
+}
+
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 35px;
+}
+
+.topbar h1 {
+    font-size: 28px;
+    margin-bottom: 8px;
+}
+
+.topbar p,
+.panel-heading p {
+    color: #888;
+    font-size: 13px;
+}
+
+.admin {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.avatar {
+    background: #b99143;
+    color: black;
+    padding: 12px 16px;
+    border-radius: 50%;
+    font-weight: bold;
+}
+
+.admin small {
+    display: block;
+    color: #888;
+    margin-top: 5px;
+}
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    margin-bottom: 25px;
+}
+
+.stat-card,
+.panel {
+    background: #1a1a1a;
+    border: 1px solid #303030;
+    border-radius: 12px;
+    padding: 23px;
+}
+
+.stat-icon {
+    font-size: 25px;
+    margin-bottom: 15px;
+}
+
+.stat-card p {
+    color: #aaa;
+    font-size: 13px;
+}
+
+.stat-card h2 {
+    color: #e5bd66;
+    margin: 12px 0;
+    font-size: 26px;
+}
+
+.stat-card small {
+    color: #777;
+}
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 20px;
+    margin-bottom: 25px;
+}
+
+.panel-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.panel-heading h3,
+.panel h3 {
+    margin-bottom: 8px;
+}
+
+.tag {
+    background: #352c1a;
+    color: #e5bd66;
+    padding: 8px 15px;
+    border-radius: 5px;
+}
+
+.sales-panel canvas {
+    max-height: 260px;
+}
+
+.inventory-panel canvas {
+    max-height: 230px;
+}
+
+.legend {
+    display: flex;
+    justify-content: space-around;
+    color: #aaa;
+    font-size: 12px;
+    margin-top: 15px;
+}
+
+.transactions button {
+    background: #d6ae55;
+    border: none;
+    padding: 9px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.table-wrap {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+th, td {
+    padding: 16px 12px;
+    border-bottom: 1px solid #333;
+    white-space: nowrap;
+    font-size: 13px;
+}
+
+th {
+    color: #d6ae55;
+}
+
+td {
+    color: #ccc;
+}
+
+.status {
+    padding: 6px 12px;
+    border-radius: 15px;
+    font-size: 11px;
+}
+
+.paid {
+    background: #173d2b;
+    color: #65d99a;
+}
+
+.pending {
+    background: #44351b;
+    color: #e5bd66;
+}
+
+footer {
+    color: #777;
+    text-align: center;
+    padding: 30px;
+    font-size: 12px;
+}
+
+@media(max-width: 1000px) {
+    .stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media(max-width: 650px) {
+    .sidebar {
+        width: 75px;
+        padding: 20px 8px;
+    }
+
+    .brand {
+        font-size: 12px;
+    }
+
+    .brand span,
+    .menu-title {
+        display: none;
+    }
+
+    .sidebar a {
+        font-size: 0;
+        text-align: center;
+    }
+
+    .main-content {
+        margin-left: 75px;
+        padding: 18px;
+    }
+
+    .stats {
+        grid-template-columns: 1fr;
+    }
+
+    .topbar {
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .admin {
+        display: none;
+    }
+}
+
+.logout-btn {
+    width: 100%;
+    background: transparent;
+    border: none;
+    color: inherit;
+    text-align: left;
+    padding: 12px 15px;
+    font-size: inherit;
+    cursor: pointer;
+    font-family: inherit;
+}
+
+.logout-btn:hover {
+    color: #d6ae55;
+}

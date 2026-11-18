@@ -1,0 +1,78 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Jewelry Products</title>
+    <style>
+        body {
+            background: #111;
+            color: white;
+            font-family: Arial;
+            padding: 30px;
+        }
+        h1 { color: #d6ae55; }
+        a {
+            color: #d6ae55;
+            text-decoration: none;
+            margin-right: 15px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 25px;
+        }
+        th, td {
+            padding: 14px;
+            border-bottom: 1px solid #444;
+            text-align: left;
+        }
+        th { color: #d6ae55; }
+        .add {
+            background: #d6ae55;
+            color: black;
+            padding: 10px 15px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Jewelry Product Management</h1>
+
+    <a href="/products/add" class="add">+ Add New Product</a>
+    <a href="/">Back to Dashboard</a>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Category</th>
+                <th>Price</th>
+                <th>Weight (g)</th>
+                <th>Stock</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr th:each="product : ${products}">
+                <td th:text="${product.id}"></td>
+                <td th:text="${product.name}"></td>
+                <td th:text="${product.category}"></td>
+                <td th:text="${product.price}"></td>
+                <td th:text="${product.weight}"></td>
+                <td th:text="${product.stock}"></td>
+                <td>
+                    <a th:href="@{/products/delete/{id}(id=${product.id})}"
+                       onclick="return confirm('Delete this product?')">
+                       Delete
+                    </a>
+<a th:href="@{/products/edit/{id}(id=${product.id})}">Edit</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+</body>
+</html>

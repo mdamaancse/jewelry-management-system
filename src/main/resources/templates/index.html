@@ -1,0 +1,189 @@
+﻿<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jewelry Management | Dashboard</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+
+    <style>
+        .quick-links {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin: 20px 0;
+        }
+        .quick-links a {
+            background: #b8860b;
+            color: white;
+            padding: 12px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .alert-panel {
+            margin-top: 20px;
+            padding: 20px;
+        }
+        .alert-number {
+            color: #b8860b;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .empty-message {
+            text-align: center;
+            padding: 20px;
+        }
+        .table-wrap { overflow-x: auto; }
+    </style>
+</head>
+
+<body>
+
+<div class="sidebar">
+
+    <div class="brand">LUXE<span>JEWELS</span></div>
+
+    <p class="menu-title">MAIN MENU</p>
+
+    <a class="active" th:href="@{/}">Dashboard</a>
+    <a th:href="@{/products}">Products</a>
+    <a th:href="@{/customers}">Customers</a>
+    <a href="#">Suppliers</a>
+    <a th:href="@{/sales}">Sales</a>
+    <a href="#">Purchases</a>
+    <a th:href="@{/products}">Inventory</a>
+    <a th:href="@{/sales}">Reports</a>
+
+    <div class="sidebar-bottom">
+        <a href="#">Settings</a>
+
+        <form th:action="@{/logout}" method="post">
+            <button type="submit" class="logout-btn">Logout</button>
+        </form>
+    </div>
+
+</div>
+
+<main class="main-content">
+
+    <header class="topbar">
+        <div>
+            <h1>Dashboard</h1>
+            <p>Welcome back! Here's your business overview.</p>
+        </div>
+
+        <div class="admin">
+            <div class="avatar">A</div>
+            <div>
+                <strong sec:authentication="name">Administrator</strong>
+                <small>Super Admin</small>
+            </div>
+        </div>
+    </header>
+
+    <!-- LIVE BUSINESS STATISTICS -->
+    <section class="stats">
+
+        <div class="stat-card">
+            <div class="stat-icon">Jewelry</div>
+            <p>Total Products</p>
+            <h2 th:text="${totalProducts}">0</h2>
+            <small>Products in inventory</small>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-icon">Customers</div>
+            <p>Total Customers</p>
+            <h2 th:text="${totalCustomers}">0</h2>
+            <small>Registered customers</small>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-icon">Sales</div>
+            <p>Total Sales</p>
+            <h2 th:text="${totalSales}">0</h2>
+            <small>Completed sales records</small>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-icon">Revenue</div>
+            <p>Total Revenue</p>
+            <h2 th:text="'₹ ' + ${#numbers.formatDecimal(totalRevenue, 1, 2)}">₹ 0.00</h2>
+            <small>Total recorded sales value</small>
+        </div>
+
+    </section>
+
+    <!-- QUICK ACTIONS -->
+    <section class="panel">
+        <h3>Quick Actions</h3>
+
+        <div class="quick-links">
+            <a th:href="@{/products/add}">Add Product</a>
+            <a th:href="@{/customers/add}">Add Customer</a>
+            <a th:href="@{/sales/add}">Create New Sale</a>
+            <a th:href="@{/products}">View Inventory</a>
+        </div>
+    </section>
+
+    <!-- INVENTORY ALERT -->
+    <section class="panel alert-panel">
+        <h3>Inventory Alert</h3>
+        <p>Products with stock quantity of 5 or less:</p>
+        <div class="alert-number" th:text="${lowStockCount}">0</div>
+        <small>Low stock products</small>
+    </section>
+
+    <!-- RECENT SALES -->
+    <section class="panel transactions">
+
+        <div class="panel-heading">
+            <div>
+                <h3>Recent Transactions</h3>
+                <p>Latest sales from your database</p>
+            </div>
+            <a th:href="@{/sales}">View All</a>
+        </div>
+
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Sale ID</th>
+                        <th>Customer</th>
+                        <th>Product</th>
+                        <th>Quantity</th>
+                        <th>Amount</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr th:each="sale : ${recentSales}">
+                        <td th:text="${sale.id}"></td>
+                        <td th:text="${sale.customer.name}"></td>
+                        <td th:text="${sale.product.name}"></td>
+                        <td th:text="${sale.quantity}"></td>
+                        <td th:text="'₹ ' + ${#numbers.formatDecimal(sale.totalAmount, 1, 2)}"></td>
+                        <td th:text="${sale.saleDate}"></td>
+                    </tr>
+
+                    <tr th:if="${#lists.isEmpty(recentSales)}">
+                        <td colspan="6" class="empty-message">
+                            No sales transactions available yet.
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </section>
+
+    <footer>
+        Copyright 2026 Luxe Jewels | Jewelry Management System
+    </footer>
+
+</main>
+
+</body>
+</html>

@@ -1,0 +1,51 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Customer Management</title>
+    <style>
+        body { font-family: Arial; background: #f5f5f5; padding: 30px; }
+        .container { background: white; padding: 25px; border-radius: 10px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { padding: 12px; border: 1px solid #ddd; text-align: left; }
+        th { background: #b8860b; color: white; }
+        a { color: #9b7200; margin-right: 10px; }
+        .btn { display: inline-block; background: #b8860b; color: white; padding: 10px; text-decoration: none; }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <h1>Customer Management</h1>
+
+    <a class="btn" th:href="@{/customers/add}">Add New Customer</a>
+    <a th:href="@{/}">Back to Dashboard</a>
+
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Phone</th>
+            <th>Email</th>
+            <th>Address</th>
+            <th>Action</th>
+        </tr>
+
+        <tr th:each="customer : ${customers}">
+            <td th:text="${customer.id}"></td>
+            <td th:text="${customer.name}"></td>
+            <td th:text="${customer.phone}"></td>
+            <td th:text="${customer.email}"></td>
+            <td th:text="${customer.address}"></td>
+            <td>
+                <a th:href="@{/customers/edit/{id}(id=${customer.id})}">Edit</a>
+                <a th:href="@{/customers/delete/{id}(id=${customer.id})}"
+                   onclick="return confirm('Delete this customer?')">Delete</a>
+            </td>
+        </tr>
+    </table>
+
+</div>
+</body>
+</html>

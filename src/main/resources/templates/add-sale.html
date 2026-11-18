@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create New Sale</title>
+    <style>
+        body { font-family: Arial; background: #f5f5f5; padding: 30px; }
+        .container { max-width: 500px; margin: auto; background: white; padding: 25px; border-radius: 10px; }
+        select, input { width: 100%; padding: 10px; margin: 8px 0 15px; box-sizing: border-box; }
+        button, a { padding: 10px 18px; background: #b8860b; color: white; border: none; text-decoration: none; cursor: pointer; }
+        .error { color: red; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Create New Sale</h1>
+
+    <p class="error" th:if="${error}" th:text="${error}"></p>
+
+    <form th:action="@{/sales/save}" method="post">
+
+        <label>Select Customer</label>
+        <select name="customerId" required>
+            <option value="">Choose Customer</option>
+            <option th:each="customer : ${customers}"
+                    th:value="${customer.id}"
+                    th:text="${customer.name}"></option>
+        </select>
+
+        <label>Select Product</label>
+        <select name="productId" id="product" required>
+            <option value="">Choose Product</option>
+            <option th:each="product : ${products}"
+                    th:value="${product.id}"
+                    th:text="${product.name + ' | Price: Rs. ' + product.price + ' | Stock: ' + product.stock}"></option>
+        </select>
+
+        <label>Quantity</label>
+        <input type="number" name="quantity" min="1" required>
+
+        <button type="submit">Save Sale</button>
+    </form>
+
+    <br><br>
+    <a th:href="@{/sales}">Back to Sales</a>
+</div>
+</body>
+</html>
