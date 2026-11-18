@@ -1,52 +1,140 @@
-$path = ".\\database\\schema.sql"
+\# Jewelry Management System
 
 
 
-$content = @'
+\## Project Description
 
-CREATE DATABASE IF NOT EXISTS jewelry\_db;
-
-USE jewelry\_db;
+A Jewelry Management System developed using Java Spring Boot, Spring Data JPA, Hibernate and MySQL. It provides REST APIs to manage jewelry products and user accounts.
 
 
 
-CREATE TABLE IF NOT EXISTS products (
+\## Technologies Used
 
-&#x20;   id BIGINT AUTO\_INCREMENT PRIMARY KEY,
+\- Java 17
 
-&#x20;   product\_name VARCHAR(255) NOT NULL,
+\- Spring Boot
 
-&#x20;   category VARCHAR(255),
+\- Spring Data JPA
 
-&#x20;   description TEXT,
+\- Hibernate
 
-&#x20;   price DOUBLE,
+\- MySQL
 
-&#x20;   weight DOUBLE,
+\- Maven
 
-&#x20;   stock INT
-
-);
+\- Postman
 
 
 
-CREATE TABLE IF NOT EXISTS users (
+\## Database Setup
 
-&#x20;   id BIGINT AUTO\_INCREMENT PRIMARY KEY,
+1\. Install and start MySQL Server.
 
-&#x20;   name VARCHAR(255) NOT NULL,
+2\. Create the database using `database/schema.sql`.
 
-&#x20;   email VARCHAR(255) NOT NULL UNIQUE,
+3\. Configure your MySQL username and password in `application.properties`.
 
-&#x20;   password VARCHAR(255) NOT NULL
-
-);
-
-'@
+4\. Do not upload your actual database password to GitHub.
 
 
 
-$utf8NoBom = New-Object System.Text.UTF8Encoding($false)
+\## Run the Application
 
-\[System.IO.File]::WriteAllText((Join-Path (Get-Location) $path), $content, $utf8NoBom)
+
+
+Open PowerShell in the project folder and execute:
+
+
+
+&#x20;   .\\mvnw.cmd spring-boot:run
+
+
+
+Application URL:
+
+
+
+&#x20;   http://localhost:8080
+
+
+
+\## Product REST APIs
+
+
+
+| Method | Endpoint | Description |
+
+|---|---|---|
+
+| GET | /api/products | Get all products |
+
+| GET | /api/products/{id} | Get product by ID |
+
+| GET | /api/products/category/{category} | Filter by category |
+
+| GET | /api/products/search?keyword=value | Search products |
+
+| POST | /api/products | Add product |
+
+| PUT | /api/products/{id} | Update product |
+
+| DELETE | /api/products/{id} | Delete product |
+
+
+
+\## User REST APIs
+
+
+
+| Method | Endpoint | Description |
+
+|---|---|---|
+
+| POST | /api/users/register | Register user |
+
+| POST | /api/users/login | Login user |
+
+| GET | /api/users/profile | Get logged-in user profile |
+
+
+
+User login uses session-based authentication.
+
+
+
+\## API Testing
+
+All Product and User REST APIs have been tested using Postman.
+
+
+
+\## SQL Script
+
+Database schema is available in:
+
+
+
+&#x20;   database/schema.sql
+
+
+
+\## Project Structure
+
+\- config
+
+\- controller
+
+\- entity
+
+\- repository
+
+\- database
+
+\- resources
+
+
+
+\## Author
+
+Jewelry Management System Project
 
